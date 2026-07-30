@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shield.js Test Page</title>
+    <!-- In dev mode, we load the source as a module -->
+    <script type="module" src="/src/index.ts"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+        .sensitive-content {
+            background: #f4f4f4;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shield.js Testing Ground</h1>
+    <p>Try to right-click, copy, or use F12 on this page.</p>
+    
+    <div class="sensitive-content">
+        <h2>Confidential Data</h2>
+        <p>This paragraph contains sensitive information that should be protected from scraping, highlighting, and copying.</p>
+        <p>Shield.js will inject zero-width characters and invisible garbage spans into these tags.</p>
+    </div>
+
+    <button onclick="addDynamicContent()">Add Dynamic Content (Test Observer)</button>
+
+    <div id="dynamic-container" style="margin-top: 2rem;"></div>
+
+    <script>
+        function addDynamicContent() {
+            const container = document.getElementById('dynamic-container');
+            const p = document.createElement('p');
+            p.textContent = 'This is newly injected dynamic content. Shield.js should automatically protect it.';
+            container.appendChild(p);
+        }
+    </script>
+</body>
+</html>
