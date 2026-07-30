@@ -1,6 +1,6 @@
 {
   "name": "shield-js-core",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Zero-dependency client-side content protection library",
   "type": "module",
   "main": "dist/shield.es.js",

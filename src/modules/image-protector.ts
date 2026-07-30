@@ -4,44 +4,10 @@ export class ImageProtector {
     public protectImage(img: HTMLImageElement) {
         if (this.protectedImages.has(img)) return;
 
-        const parent = img.parentElement;
-        if (!parent) return;
-
-        // Create the invisible overlay
-        const overlay = document.createElement('div');
-        overlay.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 50;
-            background: transparent;
-        `;
-        
-        overlay.addEventListener('contextmenu', e => e.preventDefault());
-        overlay.addEventListener('dragstart', e => e.preventDefault());
-        
-        // Fix: Forward clicks to the underlying image so lightboxes/zooms still work!
-        overlay.addEventListener('click', () => {
-            img.click();
-        });
-
-        const wrapper = document.createElement('div');
-        wrapper.style.cssText = 'position: relative; display: inline-block; padding: 0; margin: 0; max-width: 100%;';
-        
-        // Inherit margin for layout flow
-        const computedStyle = window.getComputedStyle(img);
-        wrapper.style.marginTop = computedStyle.marginTop;
-        wrapper.style.marginRight = computedStyle.marginRight;
-        wrapper.style.marginBottom = computedStyle.marginBottom;
-        wrapper.style.marginLeft = computedStyle.marginLeft;
-        
-        img.style.margin = '0';
-
-        parent.insertBefore(wrapper, img);
-        wrapper.appendChild(img);
-        wrapper.appendChild(overlay);
+        // We avoid wrapping the image in a DOM node (which breaks React and layouts).
+        // event-trapper.ts already handles global contextmenu/drag blocks.
+        // We just ensure draggable is explicitly false.
+        img.draggable = false;
 
         this.protectedImages.add(img);
     }
