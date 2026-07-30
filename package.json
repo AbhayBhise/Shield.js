@@ -1,8 +1,26 @@
 {
-  "name": "shield.js",
-  "version": "0.1.0",
+  "name": "shield-js-core",
+  "version": "1.0.2",
   "description": "Zero-dependency client-side content protection library",
   "type": "module",
+  "main": "dist/shield.es.js",
+  "module": "dist/shield.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/shield.es.js",
+      "require": "./dist/shield.es.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "security",
+    "anti-scraping",
+    "protection",
+    "obfuscation"
+  ],
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

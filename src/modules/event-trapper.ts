@@ -20,7 +20,7 @@ export class EventTrapper {
         // Inject anti-selection CSS
         this.styleElement = document.createElement('style');
         this.styleElement.textContent = `
-            * {
+            *:not(input):not(textarea):not([contenteditable="true"]) {
                 -webkit-touch-callout: none !important;
                 -webkit-user-select: none !important;
                 -khtml-user-select: none !important;

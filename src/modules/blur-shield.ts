@@ -13,8 +13,12 @@ export class BlurShield {
     private init() {
         const options = { signal: this.controller.signal, capture: true };
         
-        window.addEventListener('blur', () => this.applyBlur(), options);
-        window.addEventListener('focus', () => this.removeBlur(), options);
+        window.addEventListener('blur', (e) => {
+            if (e.target === window || e.target === document) this.applyBlur();
+        }, options);
+        window.addEventListener('focus', (e) => {
+            if (e.target === window || e.target === document) this.removeBlur();
+        }, options);
         window.addEventListener('keydown', (e: KeyboardEvent) => this.handleKeyDown(e), options);
         window.addEventListener('keyup', (e: KeyboardEvent) => this.handleKeyUp(e), options);
         

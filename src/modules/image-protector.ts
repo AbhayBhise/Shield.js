@@ -21,6 +21,11 @@ export class ImageProtector {
         
         overlay.addEventListener('contextmenu', e => e.preventDefault());
         overlay.addEventListener('dragstart', e => e.preventDefault());
+        
+        // Fix: Forward clicks to the underlying image so lightboxes/zooms still work!
+        overlay.addEventListener('click', () => {
+            img.click();
+        });
 
         const wrapper = document.createElement('div');
         wrapper.style.cssText = 'position: relative; display: inline-block; padding: 0; margin: 0; max-width: 100%;';
