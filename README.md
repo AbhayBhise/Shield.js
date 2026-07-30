@@ -22,10 +22,10 @@ At just **~3KB gzipped**, Shield.js offers enterprise-grade protections without 
 
 Shield.js is designed to be a **zero-configuration drop-in**. The moment the script loads into the browser, it automatically initializes and arms all security protocols.
 
-You have two ways to integrate it into your user's websites:
+You have two ways to integrate it into your website:
 
 ### Method 1: Drop-in Script Tag (Easiest)
-For traditional HTML websites, WordPress, or users who want the easiest integration, they simply copy and paste the `shield.min.js` file into their `<head>` tag. 
+For traditional HTML websites, WordPress, or developers who want the easiest integration, simply copy and paste the `shield.min.js` file into your `<head>` tag. 
 
 ```html
 <!DOCTYPE html>
@@ -46,9 +46,9 @@ For traditional HTML websites, WordPress, or users who want the easiest integrat
 ```
 
 ### Method 2: NPM / ES Module (For React, Next.js, Vue)
-If you publish this package to NPM, developers can install it and import it directly into their modern JavaScript frameworks. 
+Shield.js is available on NPM and can be easily integrated into modern JavaScript frameworks. 
 
-Because we built the `MutationWatcher`, Shield.js fully supports Single Page Applications (SPAs). It will automatically protect new text and images as they dynamically load via React/Vue routing.
+Because Shield.js includes a `MutationWatcher`, it fully supports Single Page Applications (SPAs). It will automatically protect new text and images as they dynamically load via React/Vue routing.
 
 **1. Install via NPM:**
 ```bash
