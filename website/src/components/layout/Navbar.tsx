@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Shield, Menu, X, ArrowRight, Star } from "lucide-react";
 import { GithubIcon } from "@/components/ui/GithubIcon";
@@ -8,6 +8,18 @@ import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [stars, setStars] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("https://api.github.com/repos/AbhayBhise/Shield.js")
+      .then((res) => res.json())
+      .then((data) => {
+        if (typeof data.stargazers_count === "number") {
+          setStars(data.stargazers_count);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
@@ -64,13 +76,17 @@ export function Navbar() {
             href="https://github.com/AbhayBhise/Shield.js"
             target="_blank"
             rel="noreferrer"
-            className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 hover:text-white transition-all"
+            className="flex items-center gap-2 px-3 py-1.5 text-xs font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 hover:text-white transition-all group"
           >
             <GithubIcon className="w-4 h-4" />
             <span>GitHub</span>
-            <span className="bg-zinc-800 px-1.5 py-0.5 rounded text-[11px] text-zinc-400 flex items-center gap-1">
-              <Star className="w-3 h-3 text-amber-400 fill-amber-400" /> 1.2k
-            </span>
+            {stars !== null && stars > 0 ? (
+              <span className="bg-zinc-800 px-1.5 py-0.5 rounded text-[11px] text-zinc-400 flex items-center gap-1">
+                <Star className="w-3 h-3 text-amber-400 fill-amber-400" /> {stars}
+              </span>
+            ) : (
+              <Star className="w-3.5 h-3.5 text-zinc-500 group-hover:text-amber-400 group-hover:fill-amber-400 transition-colors" />
+            )}
           </a>
 
           <Link href="/docs">
@@ -140,10 +156,15 @@ export function Navbar() {
               href="https://github.com/AbhayBhise/Shield.js"
               target="_blank"
               rel="noreferrer"
-              className="flex items-center justify-center gap-2 py-2.5 text-sm font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 rounded-md"
+              className="flex items-center justify-center gap-2 py-2.5 text-sm font-mono text-zinc-300 bg-zinc-900 border border-zinc-800 rounded-md hover:bg-zinc-800 hover:text-white transition-all"
             >
               <GithubIcon className="w-4 h-4" />
-              <span>Star on GitHub (1.2k)</span>
+              <span>Star on GitHub</span>
+              {stars !== null && stars > 0 ? (
+                <span className="text-xs text-amber-400">({stars})</span>
+              ) : (
+                <Star className="w-4 h-4 text-amber-400" />
+              )}
             </a>
 
             <Link href="/docs" onClick={() => setMobileMenuOpen(false)}>

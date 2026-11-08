@@ -104,7 +104,9 @@ export default function Home() {
             </div>
             
             <div className="flex flex-wrap justify-center items-center gap-4 text-xs font-mono uppercase tracking-widest text-muted-foreground mt-4 drop-shadow-md">
-              <span>★ 1.2k GitHub Stars</span>
+              <span>Client-Side Security</span>
+              <span className="hidden sm:inline">—</span>
+              <span>Zero Dependencies</span>
               <span className="hidden sm:inline">—</span>
               <span>MIT License</span>
             </div>
