@@ -1,0 +1,19 @@
+# API Reference
+
+If you need programmatic control over Shield.js after it has initialized, you can use the exposed API methods.
+
+## Methods
+
+### \`Shield.arm()\`
+Manually arms all security protocols if they were previously paused.
+
+### \`Shield.disarm()\`
+Temporarily disables protections (useful for authenticated admin dashboards).
+
+### \`Shield.status()\`
+Returns the current active state of the Shield.js runtime.
+
+```javascript
+const currentStatus = Shield.status();
+console.log(currentStatus.armed); // true
+```

@@ -1,0 +1,23 @@
+# Configuration Options
+
+Shield.js comes pre-configured with secure defaults, but you can customize its behavior by passing a configuration object during initialization if you are using the NPM module.
+
+## Example
+
+```javascript
+import { Shield } from 'shield-js-core';
+
+Shield.init({
+  disableDevTools: true,
+  blockRightClick: true,
+  poisonDOM: true,
+  allowSelect: false,
+});
+```
+
+## Options Reference
+
+* \`disableDevTools\` (boolean) - Automatically trap the browser inspector.
+* \`blockRightClick\` (boolean) - Disable context menus entirely.
+* \`poisonDOM\` (boolean) - Inject invisible noise into text nodes.
+* \`allowSelect\` (boolean) - Allow users to highlight text (not recommended).

@@ -1,0 +1,31 @@
+# Framework Guides
+
+Shield.js uses a \`MutationWatcher\` under the hood, meaning it plays nicely with modern Single Page Applications (SPAs) right out of the box.
+
+## React & Next.js
+
+Import the library in your root \`layout.tsx\` or \`_app.tsx\` file:
+
+```tsx
+import 'shield-js-core';
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+## Vue.js / Nuxt
+
+Import the library in your main entry file \`main.js\`:
+
+```javascript
+import 'shield-js-core';
+import { createApp } from 'vue'
+import App from './App.vue'
+
+createApp(App).mount('#app')
+```
