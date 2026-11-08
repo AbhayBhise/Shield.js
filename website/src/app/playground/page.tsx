@@ -18,7 +18,7 @@ export default function Playground() {
     if (isArmed) return;
     
     // Initialize Shield.js in its official way with real onBlock callback
-    import("shield-js-core").then(({ Shield }) => {
+    import("@/lib/shield-core").then(({ Shield }) => {
       new Shield({
         onBlock: (event: any) => {
           const detailStr = event.metadata?.eventName
