@@ -1,10 +1,13 @@
 import { BLOCKED_KEYS } from '../utils/constants';
+import type { ShieldEvent } from '../shield';
 
 export class ShortcutBlocker {
     private controller: AbortController;
+    private onBlock?: (event: ShieldEvent) => void;
 
-    constructor() {
+    constructor(onBlock?: (event: ShieldEvent) => void) {
         this.controller = new AbortController();
+        this.onBlock = onBlock;
         this.init();
     }
 
@@ -27,6 +30,19 @@ export class ShortcutBlocker {
             ) {
                 e.preventDefault();
                 e.stopPropagation();
+
+                this.onBlock?.({
+                    type: 'SHORTCUT',
+                    metadata: {
+                        key: e.key,
+                        ctrlKey: e.ctrlKey,
+                        metaKey: e.metaKey,
+                        shiftKey: e.shiftKey,
+                        altKey: e.altKey
+                    },
+                    pageUrl: typeof window !== 'undefined' ? window.location.href : '',
+                    timestamp: new Date().toISOString()
+                });
             }
         }, { signal: this.controller.signal, capture: true });
     }

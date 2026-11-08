@@ -1,9 +1,13 @@
+import type { ShieldEvent } from '../shield';
+
 export class EventTrapper {
     private controller: AbortController;
     private styleElement: HTMLStyleElement | null = null;
+    private onBlock?: (event: ShieldEvent) => void;
 
-    constructor() {
+    constructor(onBlock?: (event: ShieldEvent) => void) {
         this.controller = new AbortController();
+        this.onBlock = onBlock;
         this.init();
     }
 
@@ -14,7 +18,7 @@ export class EventTrapper {
         const blockedEvents = ['contextmenu', 'copy', 'cut', 'paste', 'dragstart', 'selectstart'];
         
         blockedEvents.forEach(evt => {
-            document.addEventListener(evt, this.preventDefault, { signal, capture: true });
+            document.addEventListener(evt, this.createEventHandler(evt), { signal, capture: true });
         });
 
         // Inject anti-selection CSS
@@ -35,13 +39,34 @@ export class EventTrapper {
         document.addEventListener('touchstart', (e) => {
             if (e.touches.length > 1) {
                 e.preventDefault();
+                this.onBlock?.({
+                    type: 'SELECT',
+                    metadata: { reason: 'multi-touch' },
+                    pageUrl: typeof window !== 'undefined' ? window.location.href : '',
+                    timestamp: new Date().toISOString()
+                });
             }
         }, { signal, passive: false });
     }
 
-    private preventDefault(e: Event) {
-        e.preventDefault();
-        e.stopPropagation();
+    private createEventHandler(evtName: string) {
+        return (e: Event) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            let type: ShieldEvent['type'] = 'CONTEXT_MENU';
+            if (evtName === 'contextmenu') type = 'CONTEXT_MENU';
+            else if (evtName === 'copy' || evtName === 'cut') type = 'COPY';
+            else if (evtName === 'selectstart') type = 'SELECT';
+            else if (evtName === 'dragstart') type = 'DRAG';
+
+            this.onBlock?.({
+                type,
+                metadata: { eventName: evtName },
+                pageUrl: typeof window !== 'undefined' ? window.location.href : '',
+                timestamp: new Date().toISOString()
+            });
+        };
     }
 
     public destroy() {

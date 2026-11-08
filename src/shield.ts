@@ -8,6 +8,27 @@ import { PrintBlocker } from './modules/print-blocker';
 import { ImageProtector } from './modules/image-protector';
 import { FrameBuster } from './modules/frame-buster';
 
+export type ShieldEventType = 
+    | 'COPY' 
+    | 'SELECT' 
+    | 'CONTEXT_MENU' 
+    | 'DEVTOOLS' 
+    | 'PRINT' 
+    | 'DRAG' 
+    | 'SCREENSHOT' 
+    | 'SHORTCUT';
+
+export interface ShieldEvent {
+    type: ShieldEventType;
+    metadata?: Record<string, unknown>;
+    pageUrl: string;
+    timestamp: string;
+}
+
+export interface ShieldOptions {
+    onBlock?: (event: ShieldEvent) => void;
+}
+
 export class Shield {
     private eventTrapper: EventTrapper;
     private shortcutBlocker: ShortcutBlocker;
@@ -18,15 +39,16 @@ export class Shield {
     private mutationWatcher: MutationWatcher;
     private printBlocker: PrintBlocker;
 
-    constructor() {
-        this.eventTrapper = new EventTrapper();
-        this.shortcutBlocker = new ShortcutBlocker();
-        this.devToolsTrap = new DevToolsTrap();
-        this.blurShield = new BlurShield();
+    constructor(options?: ShieldOptions) {
+        const onBlock = options?.onBlock;
+        this.eventTrapper = new EventTrapper(onBlock);
+        this.shortcutBlocker = new ShortcutBlocker(onBlock);
+        this.devToolsTrap = new DevToolsTrap(onBlock);
+        this.blurShield = new BlurShield(onBlock);
         this.domPoisoner = new DOMPoisoner();
         this.imageProtector = new ImageProtector();
         this.mutationWatcher = new MutationWatcher(this.domPoisoner, this.imageProtector);
-        this.printBlocker = new PrintBlocker();
+        this.printBlocker = new PrintBlocker(onBlock);
         new FrameBuster(); // Instantiated once, no cleanup needed
         
         console.log('Shield.js initialized. Content protected.');

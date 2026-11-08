@@ -1,12 +1,15 @@
 import { BLUR_DELAY } from '../utils/constants';
+import type { ShieldEvent } from '../shield';
 
 export class BlurShield {
     private controller: AbortController;
     private overlay: HTMLDivElement | null = null;
     private unblurTimeout: number | null = null;
+    private onBlock?: (event: ShieldEvent) => void;
 
-    constructor() {
+    constructor(onBlock?: (event: ShieldEvent) => void) {
         this.controller = new AbortController();
+        this.onBlock = onBlock;
         this.init();
     }
 
@@ -28,20 +31,27 @@ export class BlurShield {
         }, options);
     }
 
-    private triggerProtection() {
+    private triggerProtection(keyName?: string) {
         this.applyBlur();
         this.scheduleUnblur(BLUR_DELAY);
+
+        this.onBlock?.({
+            type: 'SCREENSHOT',
+            metadata: { trigger: keyName || 'focus-lost' },
+            pageUrl: typeof window !== 'undefined' ? window.location.href : '',
+            timestamp: new Date().toISOString()
+        });
     }
 
     private handleKeyDown(e: KeyboardEvent) {
         if ((e.metaKey && e.shiftKey) || e.key === 'PrintScreen') {
-            this.triggerProtection();
+            this.triggerProtection(e.key);
         }
     }
 
     private handleKeyUp(e: KeyboardEvent) {
         if (e.key === 'PrintScreen') {
-            this.triggerProtection();
+            this.triggerProtection(e.key);
             return;
         }
 

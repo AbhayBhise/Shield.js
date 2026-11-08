@@ -1,4 +1,5 @@
 import { Shield } from './shield';
+export type { ShieldEvent, ShieldEventType, ShieldOptions } from './shield';
 
 // For ESM usage
 export { Shield };
