@@ -108,7 +108,7 @@ export default function Home() {
               <span className="hidden sm:inline">—</span>
               <span>Zero Dependencies</span>
               <span className="hidden sm:inline">—</span>
-              <span>MIT License</span>
+              <span>Source Available</span>
             </div>
           </motion.div>
         </motion.div>

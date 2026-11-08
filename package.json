@@ -20,7 +20,7 @@
     "protection",
     "obfuscation"
   ],
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

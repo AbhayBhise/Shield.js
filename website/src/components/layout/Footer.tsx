@@ -96,9 +96,9 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Open Source / Community */}
+          {/* Community & Legal */}
           <div className="space-y-4">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-200">Community</h4>
+            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-200">Community & Legal</h4>
             <ul className="space-y-2.5 text-sm">
               <li>
                 <a 
@@ -112,26 +112,43 @@ export function Footer() {
               </li>
               <li>
                 <a 
-                  href="https://github.com/AbhayBhise/Shield.js/issues" 
-                  target="_blank" 
-                  rel="noreferrer" 
-                  className="hover:text-cyan-400 transition-colors"
-                >
-                  Issue Tracker
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://github.com/AbhayBhise/Shield.js/stargazers" 
+                  href="https://github.com/AbhayBhise/Shield.js/blob/main/CONTRIBUTING.md" 
                   target="_blank" 
                   rel="noreferrer" 
                   className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1"
                 >
-                  GitHub Stargazers
+                  Contributing Guide <ExternalLink className="w-3 h-3 text-zinc-500" />
                 </a>
               </li>
               <li>
-                <span className="text-zinc-500">MIT Open Source License</span>
+                <a 
+                  href="https://github.com/AbhayBhise/Shield.js/blob/main/CLA.md" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1"
+                >
+                  Contributor License Agreement <ExternalLink className="w-3 h-3 text-zinc-500" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://github.com/AbhayBhise/Shield.js/blob/main/SECURITY.md" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1"
+                >
+                  Security Policy <ExternalLink className="w-3 h-3 text-zinc-500" />
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://github.com/AbhayBhise/Shield.js/blob/main/LICENSE" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1"
+                >
+                  Source-Available License <ExternalLink className="w-3 h-3 text-zinc-500" />
+                </a>
               </li>
             </ul>
           </div>
@@ -141,7 +158,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border/20 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
           <div className="flex items-center space-x-2 text-zinc-500 text-center sm:text-left">
-            <span>Built with precision by</span>
+            <span>Proprietary work by</span>
             <a
               href="https://github.com/AbhayBhise"
               target="_blank"
@@ -150,7 +167,7 @@ export function Footer() {
             >
               Abhay Bhise
             </a>
-            <span>• Open Source for all developers</span>
+            <span>• All Rights Reserved</span>
           </div>
 
           <div className="flex items-center space-x-6">

@@ -78,10 +78,12 @@ Client-side protection is a **deterrent**, not a flawless security boundary. Whi
 
 ---
 
-## 📄 License & Liability
+## 📄 License & Proprietary Ownership
 
-This project is licensed under the **MIT License**.
+Shield.js is proprietary software authored and owned by **Abhay Bhise** and released under the **Shield.js Source-Available and Evaluation License (Version 1.0)**.
 
-By using this software, you acknowledge that it is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software.
+- **Inspection & Personal Evaluation:** You are free to view, study, and test the source code for personal, non-commercial evaluation.
+- **Commercial Restrictions:** Unauthorized redistribution, commercial resale, forking as a competing service, or white-labeling without a commercial license from Abhay Bhise is strictly prohibited.
+- **Contributions:** Improvements and contributions are welcome under our [Contributor License Agreement (CLA)](./CLA.md) and [Contributing Guidelines](./CONTRIBUTING.md).
 
-**You are 100% legally protected from any liability arising from users installing this package.**
+For commercial licensing inquiries or enterprise rights, contact: **bhiseabhay890@gmail.com**.
